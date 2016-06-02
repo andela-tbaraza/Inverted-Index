@@ -2,5 +2,5 @@
 "debug": false,
 "devel": true,
 "eqeqeq": true,
-"strict": false
+"strict": true
 }
