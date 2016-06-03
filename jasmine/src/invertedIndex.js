@@ -1,26 +1,28 @@
 function Index() {
-  // load books.json file
+  "use strict";
+  //load books.json file
   this.createIndex = function(filepath) {
-    var jsonFile = require(filepath);
-        // console.log(jsonFile);
+    var jsonFile = require("../books.json")
 
   this.getIndex = function() {
+     jsonFile.map((book, index1) => {
+     var wordsArray = [];
+    //console.log(book,index)
+    var books = JSON.stringify(book).toLowerCase().split(/\W/g).filter(function (string){
+    return string.length != 0;});
+    //console.log(books)
+    //console.log(books.length) //book1 = 18 book 2 =28
+    books.map((words) => {
+        var IndexObject = (words + ":" + " " + index1);
+        wordsArray.push(IndexObject)
 
-    // var arr = [];
-    // jsonFile.forEach(function(objects) {
-    //   (Object.keys(objects)).forEach(function(key) {
-    //     console.log(objects[key].toString().split("-"))
-    //     var str = objects[key].toString();
-    //     // console.log(typeof(str))
-    //     // arr.push(str);
-    //     // console.log(arr)
-    //   });
-    //   });
-
+    })
+console.log(wordsArray)
+})
 
     }
     this.searchIndex = function(terms){
-    results = [];
+    var results = [];
 
   jsonFile.map((book, index) => {
       const wordToSearch = new RegExp(terms, 'gi');
@@ -37,17 +39,6 @@ function Index() {
   }
   };
 
-  // searchIndex('lord')
-
-
-    // }z
-    // var r;
-    // for (var i = 0; i < f.length; i++) {
-    //   console.log(JSON.stringify(f[i]).split(" "))
-    //   // for (var key in f[i]) {
-    //   //   r += f[i][key]
-    //   // }
-    //   }
 
     }
   };
@@ -56,13 +47,6 @@ function Index() {
 var obj = new Index()
 obj.createIndex("../books.json");
 obj.getIndex()
-obj.searchIndex("and")
+obj.searchIndex("lord")
 
 
-//console.log(f[0]["title"]);
-// for (var i in f) {
-//   console.log(f[i])
-// }
-// for (var l of f[i]) {
-//   console.log(l)
-// }
