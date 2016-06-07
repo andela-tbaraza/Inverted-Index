@@ -1,59 +1,36 @@
-describe("Read book data", function(){
-  var invertedIndex = new Index();
+var Index = require('../src/invertedIndex')
+var index = new Index();
 
-  // Before each test can run do this.
-  beforeEach(function(done) {
-    invertedIndex.createIndex('./books.json').done(function(data) {
-      invertedIndex.results = data;
-      // invertedIndex.getIndex(data);
-      done();
-    });
+// index.readJSONFromFile('../books.json')
+describe("Index", function(){
+        describe("Read JSON", function(){
+            it("should read the JSON file and assert its not empty", function(){
+              index.readJSONFromFile(__dirname + '/../books.json')
+               expect(index.books.length).toBeGreaterThan(0);
+               console.log((index.books))
+            });
+        });
   });
+ beforeEach(function() {
+  index.books = [
+                  {
+                   toni: "Tonida"
+                  }
+  ]
+ })
+describe("populate Index", function() {
+  it("should check that index is created once the JSON file has been read", function(){
+    index.createIndex()
+    expect(index.indexArray.length).not.toBe(0)
+  })
+  it("should check index maps the string keys to the correct objects in the JSON array.", function() {
+    index.getIndex()
+    expect(index.indexArray).toEqual(['toni : 0 : 0', 'tonida : 0 : 1' ])
+  })
+})
 
-  describe('Read book data', function() {
-    // Check whether the JSON data is an array containing objects
-    it('Loads JSON data successfully', function() {
-      expect(invertedIndex.results).not.toBeUndefined();
-      // expect(invertedIndex.results.length).not.toEqual(0);
-      // expect(invertedIndex.results.length).toBe(2);
-      // expect(Array.isArray(invertedIndex.results)).toBe(true);
-    });
-    // The array should contain objects.
-    // it('Contents of the array are objects', function() {
-    //   expect(invertedIndex.results[0] instanceof Object).toBe(true);
-    //   expect(invertedIndex.results[1] instanceof Object).toBe(true);
-    // });
-  });
-
-  // it("check JSON file is present", function() {
-  //   fetch("../books.json")
-  //   .then(function(response){
-  //       jsonFile = response.json();
-  //       return jsonFile;
-  //     })
-  //  //var f = require("../books.json");
-  //       expect(jsonFile).not.toBe(null);
-  // });
-  // it("checks if the file is empty", function() {
-  //   fetch("../books.json")
-  //   .then(function(reponse){
-  //     return response.json();
-  //     // return jsonFile.toString();
-  //   })
-  //   .then(function(myblob) {
-  //     var objectURL = URL.createObjectURL(myBlob);
-  //   })
-  //   expect(jsonFile.length).not.toBe(0);
-  // })
-});
-
-// describe("populate index", function() {
-//   it("check if the index is populated", function() {
-//     expect(getIndex).not.toBe(null);
-//   });
-// });
-// describe('Tests', function() {
-//   it('tests true', function() {
-//     expect(true).toBe('true');
-//   });
-// });
+describe("Search index", function(){
+  it("search a term and return the inverted index", function(){
+    expect(index.searchIndex("Tonida")).toEqual(['tonida : 0 : 1'])
+  })
+})

@@ -1,61 +1,48 @@
-function Index() {
-  "use strict";
-  //load books.json file
-  this.createIndex = function(filepath) {
-    var jsonFile = require(filepath)
-    var wordsArray = [];
-    var dataIndex;
+'use strict';
 
-     jsonFile.map((book, index1) => {
+// import the file reader
 
-    //console.log(book,index)
-    var books = JSON.stringify(book).toLowerCase().split(/\W/g).filter(function (string){
-    return string.length != 0;});
-    //console.log(books)
-    //console.log(books.length) //book1 = 18 book 2 =28
-    books.map((words) => {
-        var IndexObject = (words + ":" + " " + index1);
-        wordsArray.push(IndexObject)
-    })
-    this.dataIndex = wordsArray
-    return(wordsArray)
+const fs = require('fs');
 
+class Index {
+    // method to read the json file
+    readJSONFromFile(filePath) {
+        this.books = JSON.parse(fs.readFileSync(filePath));
 
-})
+    }
+    createIndex() {
+        this.indexArray = [];
+        this.books.forEach((book, docIndex) => {
+            var bookObjectString = JSON.stringify(book).toLowerCase().replace(/\W/g, ' ').replace(/\s+/g, ' ').trim();
+            // console.log('++' + bookObjectString + '++');
+            this.indexArray = this.indexArray.concat(bookObjectString.split(' ').map((word, wordIndex) => {
+                return (word + ' : ' + docIndex + ' : ' + wordIndex);
 
-  this.getIndex = function() {
-    console.log(this.dataIndex)
+            }));
+        });
 
     }
 
-    this.searchIndex = function(terms){
-      // console.log(this.dataIndex)
-      var results = [];
-
-  this.dataIndex.map((element) => {
-      const wordToSearch = new RegExp(terms, 'gi');
-      if (wordToSearch.test(element)) {
-          results.push(element);
-          //console.log(book);
-      }
-  });
-
-  if(results.length > 0) {
-      console.log(terms + " has been found in the following documents" + " " + results)
-  }
-  else{
-      console.log("No match has been made")
-  }
-  };
-
+    getIndex() {
+        return this.indexArray;
 
     }
-  };
+    searchIndex(term) {
+        var results = this.indexArray.filter(wordStatistics => {
+            const wordToSearch = new RegExp(term, 'gi');
+            // if a true boolean is returned, wordStatistics is added to results array
+            return wordToSearch.test(wordStatistics);
+
+        });
+       if (results.length === 0) {
+            console.log('No match has been made');
+            return;
+        }
+        return results;
+
+    }
+
+}
 
 
-var obj = new Index()
-obj.createIndex("../books.json");
-obj.getIndex()
-obj.searchIndex("text")
-
-
+module.exports = Index;
