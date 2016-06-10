@@ -6,11 +6,9 @@ const fs = require('fs');
 
 class Index {
     // method to read the json file
-    readJSONFromFile(filePath) {
-        this.books = JSON.parse(fs.readFileSync(filePath));
 
-    }
-    createIndex() {
+    createIndex(filePath) {
+        this.books = JSON.parse(fs.readFileSync(filePath));
         this.indexArray = [];
         this.books.forEach((book, docIndex) => {
             var bookObjectString = JSON.stringify(book).toLowerCase().replace(/\W/g, ' ').replace(/\s+/g, ' ').trim();
@@ -43,6 +41,11 @@ class Index {
     }
 
 }
+
+
+// var obj = new Index();
+// obj.createIndex("../books.json")
+// console.log(obj.getIndex())
 
 
 module.exports = Index;
