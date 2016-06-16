@@ -2,70 +2,92 @@
 
 class Index {
 
+
+
     createIndex(filePath) {
+        var self = this;
+        this.indexObject = {};
+        
         /* specifies the environment to be used */
         if (typeof window === 'object') {
-            $.ajaxSetup({
-                async: false
-            });
 
-            $.getJSON(filePath, (data) => {
-                this.books = data;
+            return fetch(filePath).then(function(response) {
+
+                return response.json()
+            })
+            .then(function(data) {
+                
+                self.books = data;
+                
+                makeIndex()
+
             });
+            
         } else {
-            // import the file reader using fs
+            // import the file reader using require
             const fs = require('fs');
-            this.books = JSON.parse(fs.readFileSync(filePath));
+            
+            self.books = JSON.parse(fs.readFileSync(filePath));
+            
+            makeIndex()
         }
 
-        this.indexArray = [];
 
-        this.books.forEach((book, docIndex) => {
-            this.bookString = JSON.stringify(book).toLowerCase().replace(/\W/g, ' ').replace(/\s+/g, ' ').trim();
-            this.indexArray = this.indexArray.concat(this.bookString.split(' ').map((word, wordIndex) => {
-                return (word + ' : ' + docIndex + ' : ' + wordIndex);
-            }));
-        });
+        function makeIndex() {
+        /* this method creates the index and is to be called after the JSON file has been read */
+            
+            console.log(self.books)
+
+            self.books.forEach((book, docIndex) => {
+                self.bookString = JSON.stringify(book).toLowerCase().replace(/\W/g, ' ').replace(/\s+/g, ' ').trim();
+            
+            self.stringArray = self.bookString.split(' ');
+            
+            self.stringArray.forEach((word, wordIndex) => {
+                    if (self.indexObject.hasOwnProperty(word)){
+
+                            self.indexObject[word].push(docIndex)
+                        
+                    }
+                    else {
+                        
+                        self.indexObject[word] = [docIndex]
+                    }
+                    
+                });
+        
+            });
+    
+        }
     }
 
-    getIndex(term){
-        this.docArray;
-        console.log(term)
-        /*this method gets the index created in createIndex method */
-        if (term) {
-            this.docArray = this.books.map((obj, objIndex) => {
-                if (term === objIndex) {
-                    this.bookString.split(" ").map((word) => {
-                        return (word +  ':' + objIndex);
-                    });
-                };
-            });       
-        } else {
-            return this.indexArray;
-        }
+    getIndex(docIndex){
+
+        return this.indexObject
+
+    
     };
 
 
-    searchIndex (term) {
-        const results = this.indexArray.filter((wordStatistics) => {
-            const wordToSearch = new RegExp(term, 'gi');        // 
-            return wordToSearch.test(wordStatistics);
-        });
+    searchIndex (word) {
+        if (typeof word === 'string') {
+           const wordToSearch = word.toLowerCase();
 
-        if (results.length === 0) {
+            if (this.indexObject.hasOwnProperty(wordToSearch)) {
 
-          return -1;
+                return this.indexObject[wordToSearch]
+            }
+
+            return -1
         }
-
-        return results;
-
+    
     }
 
+
+
+    
+
 }
-var object = new Index;
-object.createIndex('../books.json')
-console.log(object.getIndex())
-console.log(object.searchIndex('Powerful'))
 
 
 
