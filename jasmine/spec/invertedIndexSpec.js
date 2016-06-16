@@ -1,10 +1,11 @@
+/*global Index*/
 var index = new Index();
 
 beforeEach(function(done) {
-  index.createIndex('books.json').then(function () { 
+  index.createIndex('books.json').then(function () {
     done();
   })
-  
+
 });
 
 describe("Index", function() {
@@ -34,7 +35,7 @@ describe("populate Index", function() {
     it("should check index maps the string keys to the correct objects in the JSON array.", function() {
         index.getIndex()
         expect(index.indexObject["powerful"]).toEqual([ 1 ]);
-        expect(index.indexObject["falls"]).toEqual([ 0 ]);    
+        expect(index.indexObject["falls"]).toEqual([ 0 ]);
     });
 
 
@@ -49,13 +50,13 @@ describe("Search index", function() {
 
     it("search a term and return the inverted index", function() {
         expect(index.searchIndex("Alice")).toEqual([ 0, 0 ])
-    
+
     });
 
 
     it("search a term and return all the instances of that word in the index", function() {
         expect(index.searchIndex("and")).toEqual([ 0, 1 ]);
-    
+
     })
 
 
