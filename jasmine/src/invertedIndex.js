@@ -36,9 +36,8 @@ class Index {
         function makeIndex() {
         /* this method creates the index and is to be called after the JSON file has been read */
             
-            console.log(self.books)
-
             self.books.forEach((book, docIndex) => {
+
                 self.bookString = JSON.stringify(book).toLowerCase().replace(/\W/g, ' ').replace(/\s+/g, ' ').trim();
             
             self.stringArray = self.bookString.split(' ');
@@ -62,6 +61,7 @@ class Index {
     }
 
     getIndex(docIndex){
+        if 
 
         return this.indexObject
 
