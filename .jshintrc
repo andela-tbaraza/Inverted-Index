@@ -1,6 +1,9 @@
 {
-"debug": false,
-"devel": true,
-"eqeqeq": true,
-"strict": true
+	"strict" : true,
+	"eqeqeq" : true,
+	"browser" : true,
+	"node"    : false, 
+	"esversion" : 6,
+	"debug" : true
+
 }
