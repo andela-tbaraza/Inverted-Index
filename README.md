@@ -20,19 +20,23 @@ This creates an inverted index object. An inverted index basically maps the cont
 * Change directory to jasmine/src
 * Get to nodeJS environment `$ node`
 * Require the source file and create an instance of the Index module
-```> var index = require('./invertedIndex')
- > var index = new Index()
- ```
+
+``` 
+> var index = require('./invertedIndex');
+> var test = new index();
+```
 
 ## Create the index
 The creatIndex methosd takes in a string variable that represents the path to the JSON file that its contents will be to used to create the index.
 
-```index.createIndex('../books.json')
+```
+index.createIndex('../books.json')
 ```
 
 ## Generate index
 
-```console.log(index.getIndex())
+```
+console.log(index.getIndex())
 logs
 { title: [ 0, 1 ],
 alice: [ 0 ],
@@ -45,7 +49,8 @@ lord: [ 0, 1 ],
 ## Search index
 The search method takes in different arguments and generates their index
 
-```console.log(index.searchIndex('Alice'))
+```
+console.log(index.searchIndex('Alice'))
 logs
 [ 0 ]
 
