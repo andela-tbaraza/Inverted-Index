@@ -1,8 +1,9 @@
-"use strict";
+'use strict';
 
 class Index {
   createIndex(filePath) {
     var self = this;
+
     this.indexObject = {};
 
     /* specifies the environment to be used */
@@ -27,7 +28,6 @@ class Index {
 
       makeIndex();
 
-      module.exports = Index
     }
 
 
@@ -118,10 +118,13 @@ class Index {
   }
 
 }
-// var obj = new Index();
-// obj.createIndex('../books.json')
-// console.log(obj.getIndex());
-// console.log(obj.searchIndex(['lord', 'Alice', 'wonderland'], ['ring']))
-// console.log(obj.getFrequency());
+
+if (typeof window === 'undefined') {
+  module.exports = Index;
+
+}
+
+
+
 
 
