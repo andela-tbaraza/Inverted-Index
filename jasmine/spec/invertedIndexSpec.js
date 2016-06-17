@@ -36,14 +36,14 @@ describe('populate Index', function() {
 });
 
 describe('Search index', function() {
-    it('searches for a terms in a given array', function() {
-        expect(index.searchIndex(['Alice', 'lord', 'falls', 'hole', 'and'])).toEqual({ alice: [ 0, 0 ], lord: [ 0, 1 ], falls: [ 0 ], hole: [ 0 ], and: [ 0, 1 ] });
+    it('searches for terms in a given array', function() {
+        expect(index.searchIndex(['Alice', 'lord', 'falls', 'hole', 'and'])).toEqual({ alice: [ 0 ], lord: [ 0, 1 ], falls: [ 0 ], hole: [ 0 ], and: [ 0, 1 ] });
 
     });
 
 
     it('searches a term and return its location in the JSON', function() {
-        expect(index.searchIndex('Alice')).toEqual([ 0, 0 ])
+        expect(index.searchIndex('Alice')).toEqual([ 0 ])
 
     });
 
@@ -56,3 +56,8 @@ describe('Search index', function() {
 
 
 });
+var obj = new Index();
+obj.createIndex('../books.json')
+console.log(obj.getIndex())
+console.log(obj.searchIndex(['lord', 'Alice', 'wonderland']))
+console.log(obj.getFrequency())

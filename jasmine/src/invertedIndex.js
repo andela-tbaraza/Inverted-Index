@@ -1,5 +1,5 @@
 "use strict";
-/*eslint no-unused-vars: "error"*/
+
 class Index {
   createIndex(filePath) {
     var self = this;
@@ -26,6 +26,8 @@ class Index {
       self.books = JSON.parse(fs.readFileSync(filePath));
 
       makeIndex();
+
+      module.exports = Index
     }
 
 
@@ -116,4 +118,10 @@ class Index {
   }
 
 }
+// var obj = new Index();
+// obj.createIndex('../books.json')
+// console.log(obj.getIndex());
+// console.log(obj.searchIndex(['lord', 'Alice', 'wonderland'], ['ring']))
+// console.log(obj.getFrequency());
+
 
