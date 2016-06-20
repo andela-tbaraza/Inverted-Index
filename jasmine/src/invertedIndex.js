@@ -45,12 +45,12 @@ class Index {
         /* self.stringArray is converted to a set to remove any duplication of words */
         self.stringArray = new Set((self.bookString.split(' ')));
 
-        self.stringArray.forEach((word, wordIndex) => {
+        self.stringArray.forEach(word => {
           if (self.indexObject.hasOwnProperty(word) === false){
-            self.indexObject[word] = [docIndex]
+            self.indexObject[word] = [docIndex];
 
           } else {
-            self.indexObject[word].push(docIndex)
+            self.indexObject[word].push(docIndex);
             
           }
 
@@ -64,8 +64,8 @@ class Index {
   getIndex() {
     /* returns the index created by createIndex method*/
 
-    return this.indexObject
-  };
+    return this.indexObject;
+  }
 
   getFrequency() {
     /* this method checks how many times a word occurs in the contents JSON file
@@ -76,14 +76,14 @@ class Index {
 
     this.frequencyArray.map(word => {
       if (this.frequencyObject.hasOwnProperty(word) === false) {
-        this.frequencyObject[word] = 1
+        this.frequencyObject[word] = 1;
 
       } else {
-        this.frequencyObject[word] += 1
+        this.frequencyObject[word] += 1;
       }    
 
     });
-    return this.frequencyObject
+    return this.frequencyObject;
 
   }
 
@@ -94,24 +94,24 @@ class Index {
       const wordToSearch = wordInput.toLowerCase();
 
       if (this.indexObject.hasOwnProperty(wordToSearch)) {
-        return this.indexObject[wordToSearch]
+        return this.indexObject[wordToSearch];
       }
 
     }
 
     if (Array.isArray(wordInput) === true) {
-      this.object = {}
+      this.resultsObject = {};
 
       wordInput.map(word => {
         const wordToSearch = word.toLowerCase();
 
         if (this.indexObject.hasOwnProperty(wordToSearch)) {
-          this.object[wordToSearch] = this.indexObject[wordToSearch]
+          this.resultsObject[wordToSearch] = this.indexObject[wordToSearch];
         }
 
       });
 
-    return this.object
+    return this.resultsObject;
 
     }
 

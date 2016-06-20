@@ -1,9 +1,25 @@
 {
 	"strict" : true,
 	"eqeqeq" : true,
-	"browser" : true,
 	"node"    : false, 
 	"esversion" : 6,
-	"debug" : true
+	"debug" : true,
+	"camelcase": true,
+	"curly": true,
+	"latedef" : true,
+	"quotemark" : true,
+	"undef": true,
+	"asi": false,
+	"loopfunc" : true,
+	"lastsemic": false,
+	"laxbreak" : false,
+	"unused" : true
+
+	//Environments
+	"browser" : true,
+	"node" : true,
+	"jamsine": true
+
+
 
 }

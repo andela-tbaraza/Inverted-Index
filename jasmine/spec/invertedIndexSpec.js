@@ -1,9 +1,12 @@
+'use strict';
+
 var index = new Index();
+index.indexObject = null;
 
 beforeEach(function(done) {
   index.createIndex('books.json').then(function () {
     done();
-  })
+  });
 
 });
 
@@ -23,9 +26,9 @@ describe('populate Index', function() {
     });
 
   it('should check index maps the string keys to the correct objects in the JSON array.', function() {
-    index.getIndex()
-    expect(index.indexObject['powerful']).toEqual([ 1 ]);
-    expect(index.indexObject['falls']).toEqual([ 0 ]);
+    index.getIndex();
+    expect(index.indexObject.'powerful').toEqual([ 1 ]);
+    expect(index.indexObject.'falls').toEqual([ 0 ]);
     });
 });
 
