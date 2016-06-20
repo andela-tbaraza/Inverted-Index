@@ -8,7 +8,7 @@ This creates an inverted index object. An inverted index basically maps the cont
 
 * Install [NodeJs](https://nodejs.org/en/)
 * Install httpster `npm install -g httpster`
-* Clone the repository from [here](https://github.com/andela-tbaraza/Inverted-Index.git)
+* Clone the [repository](https://github.com/andela-tbaraza/Inverted-Index.git)
 
 ***
 

@@ -13,13 +13,9 @@
 	"loopfunc" : true,
 	"lastsemic": false,
 	"laxbreak" : false,
-	"unused" : true
-
-	//Environments
+	"unused" : true,
 	"browser" : true,
 	"node" : true,
-	"jamsine": true
-
-
+	"jasmine": true
 
 }
