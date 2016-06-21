@@ -1,7 +1,7 @@
 {
 	"strict" : true,
 	"eqeqeq" : true,
-	"node"    : false, 
+	"node"    : false,
 	"esversion" : 6,
 	"debug" : true,
 	"camelcase": true,
@@ -17,5 +17,7 @@
 	"browser" : true,
 	"node" : true,
 	"jasmine": true
+
+
 
 }

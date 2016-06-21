@@ -3,32 +3,9 @@
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jasmine": true
     },
-    "extends": "airbnb",
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 6
-    },
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "no-unused-vars":
-        ["error", { "vars": false, "args": "after-used" }
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+    "global": ["Index"],
+    "extends": "airbnb"
 }

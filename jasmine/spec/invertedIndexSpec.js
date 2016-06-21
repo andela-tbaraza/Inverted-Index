@@ -1,21 +1,23 @@
+"use strict";
+
 const index = new Index();
 
-beforeEach(function(done) {
-  index.createIndex('books.json').then(function() {
+beforeEach((done => {
+  index.createIndex('books.json').then(() => {
     done();
   });
-});
+})
 
-describe('Index', function() {
-  it('should read the JSON file and assert it is not empty', function() {
+describe('Index', function () {
+  it('should read the JSON file and assert it is not empty', function () {
     expect(index.books.length).toBeGreaterThan(0);
 
   });
 });
 
-describe('populate Index', function() {
+describe('populate Index', function () {
 
-  it('should check that index is created once the JSON file has been read', function() {
+  it('should check that index is created once the JSON file has been read', function () {
     console.log(index.indexObject);
     expect(index.indexObject.length).not.toBe(0);
   });
@@ -27,7 +29,7 @@ describe('populate Index', function() {
   });
 });
 
-describe('Search index', function() {
+describe('Search index', function () {
   it('searches for terms in a given array', function() {
     expect(index.searchIndex(['Alice', 'lord', 'falls', 'hole', 'and'])).toEqual({
       alice: [0],

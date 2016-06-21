@@ -1,7 +1,6 @@
-"use strict";
+'use strict';
 
 class Index {
-
   createIndex(filePath) {
     var self = this;
     this.indexObject = {};
@@ -39,7 +38,7 @@ class Index {
         self.stringArray = new Set((self.bookString.split(' ')));
 
         self.stringArray.forEach((word) => {
-          if (self.indexObject.hasOwnProperty(word) === false) {
+          if (!self.indexObject.hasOwnProperty(word)) {
             self.indexObject[word] = [docIndex];
           } else {
             self.indexObject[word].push(docIndex);
@@ -64,10 +63,10 @@ class Index {
     const frequencyArray = this.bookString.split(' ');
 
     frequencyArray.map(word => {
-      if (this.frequencyObject.hasOwnProperty(word) === false) {
-        this.frequencyObject[word] = 1;
+      if (!frequencyObject.hasOwnProperty(word)) {
+        frequencyObject[word] = 1;
       } else {
-        this.frequencyObject[word] += 1;
+        frequencyObject[word] += 1;
       }
     });
     return frequencyObject;
