@@ -6,6 +6,6 @@
         "node": true,
         "jasmine": true
     },
-    "global": ["Index"],
+    "global Index": true,
     "extends": "airbnb"
 }
