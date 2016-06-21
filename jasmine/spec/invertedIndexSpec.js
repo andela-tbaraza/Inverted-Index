@@ -38,10 +38,19 @@ describe('Search index', () => {
   });
 
   it('searches a term and return its location in the JSON', () => {
-    expect(index.searchIndex('Alice')).toEqual([0]);
+    expect(index.searchIndex('Alice')).toEqual({ alice: [ 0 ]});
   });
 
-  it('search a term and return all the instances of that word in the index', () => {
-    expect(index.searchIndex('and')).toEqual([0, 1]);
+  it('searches a term and return all the instances of that word in the index', () => {
+    expect(index.searchIndex('and')).toEqual({and:[0, 1]});
+  });
+
+  it('searches for a phrase and return its location in the JSON', () => {
+    expect(index.searchIndex('LORD of the rings')).toEqual({
+      lord: [0, 1],
+      of: [0, 1],
+      the: [1],
+      rings: [1]
+    });
   });
 });
