@@ -72,12 +72,11 @@ class Index {
   }
 
   searchIndex(wordInput) {
-
     /* depending on the input provided this method will return an object specifying the
     location of the word in the JSON file contents */
     if (Array.isArray(wordInput) || typeof wordInput === 'string') {
       const resultsObject = {};
-      if (typeof wordInput === 'string'){
+      if (typeof wordInput === 'string') {
           wordInput = wordInput.split(' ');
       }
       wordInput.forEach(word => {
@@ -92,8 +91,3 @@ class Index {
   }
 
 }
-var obj = new Index()
-obj.createIndex('../books.json')
-console.log(obj.searchIndex(['Alice', 'wonderland']))
-console.log(obj.searchIndex('ALICE in Wonderland'))
-console.log(obj.searchIndex('TUCHE'))
