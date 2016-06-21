@@ -75,16 +75,9 @@ class Index {
 
     /* depending on the input provided this method will return an object specifying the
     location of the word in the JSON file contents */
-    if (typeof wordInput === 'string') {
-      const wordToSearch = wordInput.toLowerCase();
-
-      if (this.indexObject.hasOwnProperty(wordToSearch)) {
-        return this.indexObject[wordToSearch];
-      }
-    }
-
-    if (Array.isArray(wordInput) === true) {
+    if (Array.isArray(wordInput) || Array.isArray(wordInput.split(' '))) {
       const resultsObject = {};
+      wordInput = wordInput.split(' ');
 
       wordInput.forEach(word => {
         const wordToSearch = word.toLowerCase();
