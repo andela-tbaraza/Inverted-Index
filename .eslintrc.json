@@ -7,5 +7,12 @@
         "jasmine": true
     },
     "global Index": true,
-    "extends": "airbnb"
+    "extends": "airbnb",
+    "esnext": true,
+    "consistent-return":[
+      "error", {
+         "treatUndefinedAsUnspecified": false
+         }
+       ]
+
 }

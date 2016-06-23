@@ -1,17 +1,19 @@
+/* eslint no-unused-vars: "error"*/
+/* global Index*/
+
 class Index {
 
   makeIndex(books) {
-    /* this method creates the index and is to be called
-    after the JSON file has been read */
+    // this method creates the index and is to be called after the JSON file has been read
+
     this.indexObject = {};
     books.forEach((book, docIndex) => {
-      /* self.bookString is now a string without any special characters and trailing spaces */
+      // self.bookString is now a string without any special characters and trailing spaces
       this.bookString = JSON.stringify(book).toLowerCase()
-        .replace(/\W/g, ' ')
-        .replace(/\s+/g, ' ')
+        .replace(/\W+/g, ' ')
         .trim();
 
-      /* self.stringArray is converted to a set to remove any duplication of words */
+      // self.stringArray is converted to a set to remove any duplication of words
       this.stringArray = new Set((this.bookString.split(' ')));
 
       this.stringArray.forEach(word => {
@@ -25,19 +27,20 @@ class Index {
   }
 
   createIndex(filePath) {
-    /* specifies the environment to be used */
+    // specifies the environment to be used
+
     return new Promise((resolve, reject) => {
       if (typeof window === 'object') {
         return fetch(filePath)
-        .then(response => response.json())
-        .then(data => {
-          this.books = data;
-          this.makeIndex(data);
-          return resolve();
-        })
-        .catch((error) => reject(error));
+          .then(response => response.json())
+          .then(data => {
+            this.books = data;
+            this.makeIndex(data);
+            return resolve();
+          })
+          .catch((error) => reject(error));
       }
-      // import the  json file using require
+      //  else import the  json file using require in order to run on node
 
       try {
         const books = require(filePath); // eslint-disable-line global-require
@@ -50,13 +53,41 @@ class Index {
   }
 
   getIndex() {
-    /* returns the index created by createIndex method*/
+    // returns the index created by createIndex method
+
     return this.indexObject;
   }
 
+  searchIndex(wordInput) {
+    /*
+    depending on the input provided this method will return an object specifying
+    the location of the word in the JSON file contents
+    */
+
+    if (Array.isArray(wordInput) || typeof wordInput === 'string') {
+      const resultsObject = {};
+      if (typeof wordInput === 'string') {
+        wordInput = wordInput.split(' '); // this makes the string an array
+      }
+      wordInput.forEach(word => {
+        const wordToSearch = word.toLowerCase().replace(/\W+/g, '');
+
+        if (this.indexObject.hasOwnProperty(wordToSearch)) {
+          resultsObject[wordToSearch] = this.indexObject[wordToSearch];
+        } else {
+          resultsObject[wordToSearch] = [-1];
+        }
+      });
+      return resultsObject;
+    }
+  }
+
   getFrequency() {
-    /* this method checks how many times a word occurs in the contents JSON file
-    and returns an object with the count */
+    /*
+    this method checks how many times a word occurs in the contents JSON file
+    and returns an object with the count
+    */
+
     const frequencyObject = {};
 
     const frequencyArray = this.bookString.split(' ');
@@ -69,25 +100,6 @@ class Index {
       }
     });
     return frequencyObject;
-  }
-
-  searchIndex(wordInput) {
-    /* depending on the input provided this method will return an object specifying the
-    location of the word in the JSON file contents */
-    if (Array.isArray(wordInput) || typeof wordInput === 'string') {
-      const resultsObject = {};
-      if (typeof wordInput === 'string') {
-          wordInput = wordInput.split(' ');
-      }
-      wordInput.forEach(word => {
-        const wordToSearch = word.toLowerCase();
-
-        if (this.indexObject.hasOwnProperty(wordToSearch)) {
-          resultsObject[wordToSearch] = this.indexObject[wordToSearch];
-        }
-      });
-      return resultsObject;
-    }
   }
 
 }
