@@ -8,7 +8,9 @@ class Index {
 
     this.indexObject = {};
     books.forEach((book, docIndex) => {
-      // self.bookString is now a string without any special characters and trailing spaces
+      /* self.bookString is now a string without any special
+         characters and trailing spaces
+      */
       this.bookString = JSON.stringify(book).toLowerCase()
         .replace(/\W+/g, ' ')
         .trim();
