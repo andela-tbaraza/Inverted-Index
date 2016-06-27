@@ -65,29 +65,25 @@ class Index {
     depending on the input provided this method will return an object specifying
     the location of the word in the JSON file contents
     */
+
     if (Array.isArray(wordInput) || typeof wordInput === 'string') {
       const resultsObject = {};
       if (typeof wordInput === 'string') {
         wordInput = wordInput.split(' '); // this makes the string an array
-
       }
+      wordInput.forEach(word => {
+        const wordToSearch = word.toLowerCase().replace(/\W+/g, '');
 
-      if (Array.isArray(wordInput) === true) {
-        const resultsObject = {};
-
-        wordInput.forEach(word => {
-          const wordToSearch = word.toLowerCase().replace(/\W+/g, '');
-
-          if (this.indexObject.hasOwnProperty(wordToSearch)) {
-            resultsObject[wordToSearch] = this.indexObject[wordToSearch];
-          } else {
-            resultsObject[wordToSearch] = [-1];
-          }
-        });
-        return resultsObject;
-      }
+        if (this.indexObject.hasOwnProperty(wordToSearch)) {
+          resultsObject[wordToSearch] = this.indexObject[wordToSearch];
+        } else {
+          resultsObject[wordToSearch] = [-1];
+        }
+      });
+      return resultsObject;
     }
   }
+
 
   getFrequency() {
     /*
