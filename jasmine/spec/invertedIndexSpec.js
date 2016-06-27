@@ -40,13 +40,11 @@ describe('Search index', () => {
   });
 
   it('searches a term and return its location in the JSON', () => {
-<<<<<<< HEAD
     expect(index.searchIndex('Alice')).toEqual([0]);
   });
 
   it('search a term and return all the instances of that word in the index', () => {
     expect(index.searchIndex('and')).toEqual([0, 1]);
-=======
     expect(index.searchIndex('Alice')).toEqual({
       alice: [0],
     });
@@ -67,11 +65,10 @@ describe('Search index', () => {
     });
   });
 
-  it('returns -1 if term does notexist in the index', () => {
+  it('returns -1 if term does not exist in the index object', () => {
     expect(index.searchIndex(['moniq', 'Alice'])).toEqual({
       moniq: [-1],
       alice: [0],
     });
->>>>>>> dev
   });
 });
